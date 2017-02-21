@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EdLoader">
+        <attr name="type" format="enum">
+            <enum name="classic" value="0"/>
+            <enum name="grow" value="1"/>
+            <enum name="swap" value="2"/>
+            <enum name="jump" value="3"/>
+            <enum name="pacman" value="4"/>
+        </attr>
+        <attr name="radius" format="dimension"/>
+        <attr name="amount" format="integer"/>
+        <attr name="color" format="color"/>
+    </declare-styleable>
+</resources>
