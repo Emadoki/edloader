@@ -2,18 +2,14 @@ package com.emadoki.edloader.type;
 
 import android.graphics.Canvas;
 
-import com.emadoki.edloader.EdLoader;
 import com.emadoki.edloader.OnInvalidateListener;
 import com.emadoki.edloader.model.Circle;
+import static com.emadoki.edloader.EdLoader.Builder;
 
 public abstract class BaseType
 {
+    protected Builder builder;
     protected Circle[] circles;
-    protected float width;
-    protected float height;
-    protected float radius;
-    protected int amount;
-    protected int color;
     protected float circles_width;
     protected float progress;
     protected OnInvalidateListener listener;
@@ -23,36 +19,28 @@ public abstract class BaseType
         this.listener = listener;
     }
 
-    public void setup(EdLoader edLoader)
+    public void setup(Builder builder)
     {
-        this.width = edLoader.getWidth();
-        this.height = edLoader.getHeight();
-        this.radius = edLoader.radius;
-        this.amount = edLoader.amount;
-        this.color = edLoader.color;
+        this.builder = builder;
 
         // generate circles
-        circles = new Circle[amount];
+        circles = new Circle[builder.amount];
         float x = 0;
-        float y = height / 2;
-        // create circles
+        float y = builder.height / 2;
         for (int i = 0; i < circles.length; i++)
         {
-            x += radius;
-            circles[i] = new Circle(x, y, radius);
-            circles[i].setColor(color);
-            float margin_right = radius;
-            // calculate next circle position
-            x = circles[i].position.x + circles[i].radius + margin_right;
-            // get the total size for center_horizontal adjustment
-            if (i == circles.length - 1)
-                circles_width = circles[i].position.x + circles[i].radius;
+            // left margin and left radius
+            x += builder.margin + builder.radius;
+            // set at center point
+            circles[i] = new Circle(x, y, builder.radius);
+            // add right radius and right margin
+            x += builder.radius + builder.margin;
         }
 
-        // adjust to center_horizontal
+        circles_width = x;
         for (int i = 0; i < circles.length; i++)
         {
-            float offset = (width / 2) - (circles_width / 2);
+            float offset = (builder.width / 2) - (circles_width / 2);
             circles[i].position.x += offset;
         }
 

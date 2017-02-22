@@ -16,20 +16,37 @@ allprojects {
 
 Add this to your app gradle
 ```
-compile 'com.github.Emadoki:edloader:1.0.0'
+compile 'com.github.Emadoki:edloader:1.0.1'
 ```
 
 #### XML
 ```xml
+<!-- Basic -->
 <com.emadoki.edloader.EdLoader
             android:layout_width="72dp"
             android:layout_height="72dp"
-            app:type="classic"
-            app:radius="12dp"
-            app:amount="5"
-            app:color="#fff"/>
-```
+            app:loader_type="classic"/>
 
+<!-- Complex -->
+<com.emadoki.edloader.EdLoader
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:loader_type="classic"
+            app:loader_radius="12dp"
+            app:loader_margin="8dp"
+            app:loader_amount="4"
+            app:loader_color="#fff"
+            app:loader_speed="1.5"/>
+```
+```
+android:layout_width match_parent/wrap_content/dp/px
+android:layout_height match_parent/wrap_content/dp/px
+app:loader_radius (default 6dp)
+app:loader_margin (default 6dp)
+app:loader_amount (default 3) x >= 2
+app:loader_color (default #fff) #RGBA/#RGB/@color
+app:loader_speed (default 1)  faster < 1 < slower
+```
 #### Inspiration
 [Loader Exploration](https://material.uplabs.com/posts/loader-exploration)
 

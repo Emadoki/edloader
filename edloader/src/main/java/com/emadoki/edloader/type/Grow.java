@@ -6,14 +6,16 @@ import android.graphics.Canvas;
 public class Grow extends BaseType
 {
     private ValueAnimator animator;
-    private int DELAY = 60;
+    private final int DEFAULT_DELAY = 60;
+    private int DELAY;
 
     @Override
     public void setup()
     {
-        int degree = 360 + (amount * DELAY);
+        DELAY = (int) (DEFAULT_DELAY * builder.speed);
+        int degree = 360 + (builder.amount * DEFAULT_DELAY);
         animator = ValueAnimator.ofInt(0, degree);
-        animator.setDuration(1400 / 360 * degree);
+        animator.setDuration((long) ((1400 / 360 * degree) * builder.speed));
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
@@ -35,7 +37,7 @@ public class Grow extends BaseType
         // if 0.5f and above the circle will scale and overlap the other circles
         // because the margin right is only radius * 0.5f
         // so we keep it below 0.5f
-        float MAX_RADIUS = radius * 0.3f;
+        float MAX_RADIUS = builder.radius * 0.3f;
 
         for (int i = 0; i < circles.length; i++)
         {
@@ -54,7 +56,7 @@ public class Grow extends BaseType
 
                 // get radians for cos/sin calculation
                 double rad = Math.toRadians(angle);
-                circles[i].radius = (float) (radius + (MAX_RADIUS * Math.sin(rad)));
+                circles[i].radius = (float) (builder.radius + (MAX_RADIUS * Math.sin(rad)));
             }
             // draw it
             circles[i].render(canvas);

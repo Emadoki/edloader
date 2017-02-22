@@ -15,6 +15,7 @@ public class Circle
     public Circle(float x, float y, float radius)
     {
         position = new Vector2(x, y);
+
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);

@@ -1,14 +1,8 @@
 package com.emadoki.edloader.type;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 
-import com.emadoki.edloader.model.Circle;
 import com.emadoki.edloader.model.Pac;
 
 public class Pacman extends BaseType
@@ -19,11 +13,13 @@ public class Pacman extends BaseType
     @Override
     public void setup()
     {
-        pac = new Pac(circles[0].position.x - radius, height / 2, radius * 2);
-        pac.setColor(color);
+        float x = circles[0].position.x - builder.radius - builder.margin;
+        float pac_radius = builder.radius * 2;
+        pac = new Pac(x - pac_radius, builder.height / 2, pac_radius);
+        pac.setColor(builder.color);
 
         animator = ValueAnimator.ofInt(0, 180);
-        animator.setDuration(2200);
+        animator.setDuration((long) (2200 * builder.speed));
         animator.setInterpolator(null);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
@@ -42,7 +38,8 @@ public class Pacman extends BaseType
     @Override
     public void render(Canvas canvas)
     {
-        pac.moveX((circles_width + (pac.rect.width() * 2)) * (progress / 180));
+        float width = pac.rect.width() + circles_width + pac.rect.width();
+        pac.moveX(-pac.rect.width() + (width * (progress / 180)));
 
         // create a fake progress to animate the mouth biting faster
         float dp = progress;

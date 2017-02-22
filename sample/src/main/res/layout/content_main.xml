@@ -29,7 +29,8 @@
             <com.emadoki.edloader.EdLoader
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                app:type="classic"/>
+                app:loader_type="classic"
+                app:loader_speed="1.5"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
             <com.emadoki.edloader.EdLoader
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                app:type="grow"/>
+                app:loader_type="grow"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
             <com.emadoki.edloader.EdLoader
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                app:type="swap"/>
+                app:loader_type="swap"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,9 +97,9 @@
             android:orientation="vertical">
 
             <com.emadoki.edloader.EdLoader
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                app:type="jump"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:loader_type="jump"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +119,7 @@
             <com.emadoki.edloader.EdLoader
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                app:type="pacman"/>
+                app:loader_type="pacman"/>
 
             <TextView
                 android:layout_width="wrap_content"

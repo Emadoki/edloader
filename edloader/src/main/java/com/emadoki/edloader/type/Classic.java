@@ -6,14 +6,16 @@ import android.graphics.Canvas;
 public class Classic extends BaseType
 {
     private ValueAnimator animator;
-    private int DELAY = 40;
+    private final int DEFAULT_DELAY = 40;
+    private int DELAY;
 
     @Override
     public void setup()
     {
-        int degree = 360 + (amount * DELAY);
+        DELAY = (int) (DEFAULT_DELAY * builder.speed);
+        int degree = 360 + (builder.amount * DEFAULT_DELAY);
         animator = ValueAnimator.ofInt(0, degree);
-        animator.setDuration(1200 / 360 * degree);
+        animator.setDuration((long) ((1200 / 360 * degree) * builder.speed));
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
@@ -48,7 +50,7 @@ public class Classic extends BaseType
                 // get radians for cos/sin calculation
                 double rad = Math.toRadians(angle);
                 // update the position y
-                circles[i].position.y = (float) ((height / 2f - circles[i].radius) * Math.sin(rad) + (height / 2f));
+                circles[i].position.y = (float) ((builder.height / 2f - circles[i].radius) * Math.sin(rad) + (builder.height / 2f));
             }
             // draw it
             circles[i].render(canvas);
